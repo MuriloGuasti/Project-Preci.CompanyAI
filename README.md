@@ -30,10 +30,9 @@
 
   <p align="center">
     <a href="#-visão-geral">Visão Geral</a> •
+    <a href="#telas-da-plataforma">Telas da Plataforma</a> •
     <a href="#-arquitetura-do-sistema">Arquitetura</a> •
     <a href="#-módulos-da-plataforma">Módulos</a> •
-    <a href="#-motor-de-workflows-dag">Motor de Workflows</a> •
-    <a href="#-pipeline-rag-híbrido">Pipeline RAG</a> •
     <a href="#-design-system--uiux">Design System</a> •
     <a href="#-segurança--multi-tenancy">Segurança</a> •
     <a href="#-stack-tecnológica">Stack</a> •
@@ -58,6 +57,23 @@ A plataforma **preci.** foi desenvolvida para resolver a fragmentação que exis
 2. **Construtor Visual de Agentes & Workflows (estilo n8n)**: Canvas interativo sem dependências pesadas, com curvas Bézier, inputs embutidos diretamente nos cards, conexão handle-to-field e 11 nós especializados orientados a grafo acíclico dirigido (DAG).
 3. **Gestão Documental & RAG Híbrido Corporativo**: Indexação vetorial com `pgvector`, busca textual em português via `tsvector`, fusão de rankings via *Reciprocal Rank Fusion (RRF k=60)* e reranking heurístico com boost de match exato e recência.
 4. **Isolamento Estrito Multi-tenant**: Garantia de privacidade de ponta a ponta com Row Level Security (RLS) no PostgreSQL e autenticação JWT gerenciada pelo Supabase Auth.
+
+---
+
+<a id="telas-da-plataforma"></a>
+## 📸 Telas da Plataforma
+
+Confira a interface visual moderna e monocromática da plataforma em funcionamento:
+
+<div align="center">
+
+| 🤖 [Construtor de Workflows (DAG)](#workflows-dag) | 💬 [Chat Multimodal & Streaming](#chat-multimodal) |
+| :---: | :---: |
+| <a href="#workflows-dag"><img src="assets/prints/workflowpage.png" alt="Construtor Visual de Agentes e Workflows" width="100%" /></a><br /><sub><strong>Orquestrador Visual de Workflows (DAG)</strong>: Canvas interativo com curvas Bézier, inputs embutidos nos cards e execução em tempo real.</sub> | <a href="#chat-multimodal"><img src="assets/prints/chatpage.png" alt="Interface de Chat Inteligente" width="100%" /></a><br /><sub><strong>Conversas Inteligentes Multimodais</strong>: Streaming contínuo via SSE, citações automáticas da base RAG e cancelamento instantâneo.</sub> |
+| 📁 [Gestão Documental & RAG](#gestao-documentos) | 🔐 [Autenticação & Halftone Canvas](#engenharia-visual) |
+| <a href="#gestao-documentos"><img src="assets/prints/documentspage.png" alt="Gestão de Documentos e RAG" width="100%" /></a><br /><sub><strong>Gestão Documental & Base RAG</strong>: Indexação vetorial com Google Gemini (1536d), busca híbrida e organização por pastas.</sub> | <a href="#engenharia-visual"><img src="assets/prints/loginpage.png" alt="Tela de Autenticação com Halftone Canvas" width="100%" /></a><br /><sub><strong>Autenticação & Halftone Canvas</strong>: Malha matemática vetorial reativa com repulsão ao cursor do mouse a 60 FPS.</sub> |
+
+</div>
 
 ---
 
@@ -105,7 +121,13 @@ graph TD
 
 ## 📦 Módulos da Plataforma
 
+<a id="chat-multimodal"></a>
 ### 💬 1. Conversas Inteligentes (Chat Multimodal & Streaming)
+
+<div align="center">
+  <img src="assets/prints/chatpage.png" alt="Interface de Chat Multimodal da preci." width="100%" />
+  <p align="center"><em>Interface de Chat corporativo: streaming em tempo real via SSE, citações de documentos indexados e controle dinâmico de interrupção (Stop Generation).</em></p>
+</div>
 
 - **Motor Google Gemini 3.6 Flash**: Raciocínio rápido com alta capacidade de contexto e geração com streaming contínuo via Server-Sent Events (SSE).
 - **Botão Duplo de Envio / Interrupção (Stop Generation)**:
@@ -148,7 +170,13 @@ sequenceDiagram
 
 ---
 
+<a id="workflows-dag"></a>
 ### 🤖 2. Construtor Visual de Agentes & Workflows (DAG)
+
+<div align="center">
+  <img src="assets/prints/workflowpage.png" alt="Construtor Visual de Agentes e Workflows da preci." width="100%" />
+  <p align="center"><em>Canvas gráfico nativo (SVG Bezier): cards com inputs embutidos (320px), conexões handle-to-field, controle de zoom dinâmico e 11 nós especializados.</em></p>
+</div>
 
 O módulo de workflows da **preci.** é um editor visual de grafos desenvolvido do zero sem bibliotecas pesadas de terceiros (construído com React nativo + SVG), garantindo 60 FPS estáveis mesmo em grafos com centenas de elementos:
 
@@ -197,7 +225,13 @@ graph LR
 
 ---
 
+<a id="gestao-documentos"></a>
 ### 📁 3. Gestão de Documentos & Pipeline RAG Híbrido
+
+<div align="center">
+  <img src="assets/prints/documentspage.png" alt="Gestão de Documentos e Base RAG da preci." width="100%" />
+  <p align="center"><em>Gestão documental corporativa: categorização em pastas, preview instantâneo de arquivos e indexação vetorial com Google Gemini (1536d).</em></p>
+</div>
 
 A plataforma implementa um pipeline corporativo de RAG de alta precisão que combina busca vetorial semântica profunda com busca textual full-text nativa do PostgreSQL e reranking heurístico leve:
 
@@ -266,7 +300,14 @@ Toda a identidade visual, naming, logomarcas e design system da plataforma foram
   - **Adobe Illustrator**: Construção vetorial rigorosa, alinhamento de nós, proporções áureas e exportação limpa de ícones e logotipos.
   - **Adobe Photoshop**: Refinamento de iluminação, contraste em telas de alta densidade (Retina/OLED) e acabamento monocromático para as versões **Dark Mode** (`PreciLogomarcaLightPNG.png`) e **Light Mode** (`PreciLogomarcaBlackPNG.png`).
 
+<a id="engenharia-visual"></a>
 ### Destaques de Engenharia Visual:
+
+<div align="center">
+  <img src="assets/prints/loginpage.png" alt="Tela de Autenticação com Halftone Canvas da preci." width="100%" />
+  <p align="center"><em>Tela de login corporativa minimalista com Halftone Canvas interativo (malha de pontos matemáticos com física de repulsão vetorial ao mouse).</em></p>
+</div>
+
 - **Halftone Canvas Interativo (60 FPS)**: Na tela de login, uma malha vetorial de pontos matemáticos reage em tempo real a harmônicos senoidais diagonais superpostos e à repulsão física do cursor do mouse ($140\text{px}$ de raio de ação).
 - **Tipografia Satoshi**: Família tipográfica neo-grotesca aplicada em toda a interface, com variante Semi-bold reservada para a marca `preci.`.
 - **Componente `NumberInput` Próprio**: Erradicação total dos controles numéricos nativos brancos do navegador, com steppers em cápsula monocromática (`chevrons` e `stepper`).
