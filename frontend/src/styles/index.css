@@ -1,0 +1,185 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  :root {
+    --bg-main: #F5F5F5;
+    --text-main: #171717;
+    --card-bg: #FFFFFF;
+    --border-color: #E5E5E5;
+    --sidebar-bg: #EFEFEF;
+    --input-bg: #FFFFFF;
+    --accent-hover: #E8E8E8;
+  }
+
+  .dark {
+    --bg-main: #171717;
+    --text-main: #F5F5F5;
+    --card-bg: #1E1E1E;
+    --border-color: #2E2E2E;
+    --sidebar-bg: #131313;
+    --input-bg: #1E1E1E;
+    --accent-hover: #262626;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Satoshi', sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* Custom minimal scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120, 120, 120, 0.25) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 120, 0.45);
+}
+
+/* Glassmorphism blur header */
+.header-glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(245, 245, 245, 0.85);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.dark .header-glass {
+  background: rgba(23, 23, 23, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Disable default ugly browser spinners on all number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Preci Official Minimalist Range Slider */
+input[type="range"].preci-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+  background: #E5E5E5;
+  transition: opacity 0.15s ease;
+}
+
+.dark input[type="range"].preci-slider {
+  background: #2E2E2E;
+}
+
+/* Webkit Track */
+input[type="range"].preci-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: transparent;
+}
+
+/* Webkit Thumb */
+input[type="range"].preci-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -5px; /* Centers 16px thumb on 6px track: (16 - 6) / 2 = 5px */
+  border-radius: 9999px;
+  background: #171717;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dark input[type="range"].preci-slider::-webkit-slider-thumb {
+  background: #FFFFFF;
+  border: 2px solid #171717;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
+}
+
+input[type="range"].preci-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
+input[type="range"].preci-slider:active::-webkit-slider-thumb {
+  transform: scale(1.25);
+}
+
+/* Firefox Track & Thumb */
+input[type="range"].preci-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: #E5E5E5;
+}
+
+.dark input[type="range"].preci-slider::-moz-range-track {
+  background: #2E2E2E;
+}
+
+input[type="range"].preci-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: #171717;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.dark input[type="range"].preci-slider::-moz-range-thumb {
+  background: #FFFFFF;
+  border: 2px solid #171717;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
+}
+
+input[type="range"].preci-slider:hover::-moz-range-thumb {
+  transform: scale(1.15);
+}
+
+/* Firefox Progress Fill */
+input[type="range"].preci-slider::-moz-range-progress {
+  height: 6px;
+  border-radius: 9999px;
+  background: #171717;
+}
+
+.dark input[type="range"].preci-slider::-moz-range-progress {
+  background: #FFFFFF;
+}
+
+/* Floating selection badge smooth entry & exit transition */
+.badge-spring-transition {
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}

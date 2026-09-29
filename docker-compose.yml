@@ -1,0 +1,87 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: preci-frontend
+    ports:
+      - "5173:5173"
+    env_file: .env
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - preci-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: preci-backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    env_file: .env
+    volumes:
+      - ./backend:/app
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - preci-network
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: preci-worker
+    command: arq app.workers.worker.WorkerSettings
+    env_file: .env
+    volumes:
+      - ./backend:/app
+    depends_on:
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+    networks:
+      - preci-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: preci-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - preci-network
+
+volumes:
+  redis-data:
+
+networks:
+  preci-network:
+    driver: bridge
+
+# ----------------------------------------------------------------
+# NOTA: O Supabase (Postgres/Auth/Storage) NÃO roda neste compose.
+# Use o projeto gerenciado na nuvem (recomendado para produção) ou,
+# para desenvolvimento 100% local, o Supabase CLI:
+#   npx supabase start
+# que sobe automaticamente um stack local equivalente completo.
+# ----------------------------------------------------------------
